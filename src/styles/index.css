@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  /* Eight-point star lattice, the girih tile behind every dark band. */
+  --girih: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' viewBox='0 0 88 88'%3E%3Cg fill='none' stroke='%23D9BF8C' stroke-width='1'%3E%3Crect x='24' y='24' width='40' height='40'/%3E%3Crect x='24' y='24' width='40' height='40' transform='rotate(45 44 44)'/%3E%3Ccircle cx='44' cy='44' r='9'/%3E%3Cpath d='M0 0L24 24M88 0L64 24M0 88L24 64M88 88L64 64M44 0V15.7M44 88V72.3M0 44H15.7M88 44H72.3'/%3E%3C/g%3E%3C/svg%3E");
+  /* Fine paper tooth. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .25 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+* { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Only <html> carries a background: a body background would paint over the
+   fixed sky (z-index -10) that the whole page sits on. */
+html { background: #F8F4EC; }
+body { background: transparent; }
+html, body {
+  color: #1B2A55;
+  font-family: 'Jost', system-ui, sans-serif;
+  font-weight: 400;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { overflow-x: clip; }
+
+::selection { background: #E9C6C3; color: #111D47; }
+/* Mouse devices only: a styled scrollbar on Android stops being an overlay
+   and eats 10px of layout width, shifting everything off-centre. */
+@media (hover: hover) and (pointer: fine) {
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #F1E8D8; }
+  ::-webkit-scrollbar-thumb { background: #C9B48A; border-radius: 8px; border: 2px solid #F1E8D8; }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8; }
+
+  .eyebrow { @apply font-sans text-[11px] font-medium uppercase tracking-[0.32em] text-gold; }
+
+  .h-sec {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500;
+    font-size: clamp(2.3rem, 5vw, 3.9rem); line-height: 1.04; letter-spacing: -0.01em;
+  }
+  .h-card {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500;
+    font-size: clamp(1.9rem, 3vw, 2.5rem); line-height: 1.08;
+  }
+  .lede { @apply font-display text-[1.2rem] leading-relaxed text-ink-soft sm:text-[1.32rem]; }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-sans text-[13px] font-medium uppercase tracking-[0.16em] text-lapis-night transition duration-300;
+    background: linear-gradient(135deg, #E8D4A6 0%, #C9A867 48%, #B08A4F 100%);
+    box-shadow: 0 12px 30px -14px rgb(176 138 79 / .9), inset 0 1px 0 rgb(255 255 255 / .45);
+  }
+  .btn-gold:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .btn-line {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 bg-white/40 px-6 py-3 font-sans text-[13px] font-medium uppercase tracking-[0.16em] text-ink backdrop-blur transition duration-300 hover:border-gold hover:bg-white/70;
+  }
+  .btn-line-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-gold-light/35 px-6 py-3 font-sans text-[13px] font-medium uppercase tracking-[0.16em] text-gold-pale transition duration-300 hover:border-gold-light hover:bg-white/5;
+  }
+
+  .field {
+    @apply w-full rounded-2xl border border-ink/15 bg-white/70 px-4 py-3.5 font-sans text-[15px] text-ink outline-none transition placeholder:text-ink-mute/70 focus:border-gold focus:bg-white focus:ring-4 focus:ring-gold/15;
+  }
+  .field-dark {
+    @apply w-full rounded-2xl border border-paper/15 bg-white/[0.05] px-4 py-3.5 font-sans text-[15px] text-paper outline-none transition placeholder:text-paper/35 focus:border-gold-light focus:bg-white/[0.08] focus:ring-4 focus:ring-gold-light/15;
+  }
+}
+
+/* The card's lower edge dissolves into the afternoon sky behind it. */
+.hero-fade {
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+}
+
+/* Urdu: Nastaliq needs room above and below, and cursive script must not be
+   letter-spaced or slanted. Hindi keeps conjuncts intact with tight tracking. */
+html[lang='ur'] body { font-family: 'Noto Nastaliq Urdu', 'Jost', serif; }
+html[lang='ur'] [class*='tracking-'], html[lang='ur'] .eyebrow { letter-spacing: 0 !important; }
+html[lang='ur'] :is(main, footer, header, [role='dialog']) :is(h1, h2, h3, p, span, a, button, dd, label, legend, li) { line-height: 2.1 !important; }
+html[lang='ur'] .italic { font-style: normal; }
+html[lang='ur'] .h-sec { font-size: clamp(1.9rem, 4vw, 3rem); }
+html[lang='hi'] [class*='tracking-'], html[lang='hi'] .eyebrow { letter-spacing: 0.04em !important; }
+html[lang='hi'] .italic { font-style: normal; }
+
+/* Sections that sit on the dark lapis ground carry the star lattice. */
+/* No `position` here: each user sets relative or absolute itself. */
+.girih { isolation: isolate; }
+.girih::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: var(--girih); background-size: 88px 88px; opacity: .09;
+}
+.grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: var(--grain); opacity: .22; mix-blend-mode: multiply;
+}
+
+/* The pointed (ogee) arch used for frames and windows; defined once as an SVG
+   clip path in App.jsx. */
+.arch-clip { clip-path: url(#arch); -webkit-clip-path: url(#arch); }
+
+/* Calligraphy recoloured from the SVG's own shape. */
+.bismillah-mask {
+  display: block; aspect-ratio: 94.9 / 29.5;
+  -webkit-mask: url('/img/bismillah.svg') center / contain no-repeat;
+  mask: url('/img/bismillah.svg') center / contain no-repeat;
+}
+
+/* Italic Cormorant ampersand: reads as "&" at every size, unlike the script face. */
+.amp { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 400; color: #B08A4F; }
+
+.gold-text {
+  background: linear-gradient(100deg, #B08A4F 0%, #E8D4A6 38%, #C9A867 60%, #9C7A44 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}

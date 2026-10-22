@@ -1,0 +1,12 @@
+{
+  "name": "Nikah & Walima — 22 November 2026",
+  "short_name": "Nikah & Walima",
+  "description": "Suhana & Faizan · Ramzan & Taiyaba — Sunday, 22 November 2026, Mumbai.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F8F4EC",
+  "theme_color": "#111D47",
+  "lang": "en-IN",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

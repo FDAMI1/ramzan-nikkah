@@ -1,0 +1,4 @@
+# Nikah & Walima invitation — a private family page.
+# Shared by link with guests; kept out of search results.
+User-agent: *
+Disallow: /
