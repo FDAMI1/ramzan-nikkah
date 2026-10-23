@@ -17,7 +17,7 @@ export default function Venue() {
     <section id="venue" data-time="19:30" className="relative space-y-24 py-24 text-paper sm:space-y-32 sm:py-32">
       {VENUES.map((venue, i) => (
         <div key={venue.id} className="container-x grid items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
-          <Reveal>
+          <Reveal className="text-center lg:text-start">
             <p className="eyebrow !text-gold-light">{t.venue.eyebrow}</p>
             <h2 className="h-sec mt-4">{venue.name}</h2>
             <address className="mt-6 not-italic" dir="ltr">
@@ -26,19 +26,19 @@ export default function Venue() {
               ))}
             </address>
 
-            <div className="mt-8 flex items-center gap-3 font-sans text-[15px] text-paper/80">
+            <div className="mt-8 flex items-center justify-center gap-3 font-sans text-[15px] text-paper/80 lg:justify-start">
               <Star className="h-4 w-4 shrink-0 text-gold-light" />
               {fill(t.venue.times, { dates: dayList(t, venue.days) })}
             </div>
             {i === 0 && (
-              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-sans text-[15px] text-paper/80">
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-sans text-[15px] text-paper/80 lg:justify-start">
                 <Star className="h-4 w-4 shrink-0 text-gold-light" />
                 {t.venue.help}{' '}
                 <a href={telUrl} dir="ltr" className="font-medium text-paper underline decoration-gold-light/50 underline-offset-4">{contact.display}</a>
               </div>
             )}
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap justify-center gap-3 lg:justify-start">
               <a href={mapsUrl(venue)} target="_blank" rel="noreferrer" className="btn-gold">
                 <Navigation className="h-4 w-4" strokeWidth={1.8} /> {t.venue.directions}
               </a>

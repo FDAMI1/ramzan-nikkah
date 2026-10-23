@@ -25,7 +25,7 @@ export default function Invitation() {
           </h2>
           <p className="lede mx-auto mt-5 max-w-lg !text-paper/75 lg:mx-0">{t.invitation.lede}</p>
           <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
-            <a href="/invitation.pdf" download="Nikah-Walima-Invitation-22-Nov-2026.pdf" className="btn-gold">
+            <a href={`/img/card-${invited.join('-')}.jpg`} download={`Nikah-Walima-Invitation-${invited.join('-')}-Nov-2026.jpg`} className="btn-gold">
               <Download className="h-4 w-4" strokeWidth={1.8} /> {t.invitation.download}
             </a>
             <button type="button" onClick={share} className="btn-line-dark">
