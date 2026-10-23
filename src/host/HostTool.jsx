@@ -5,7 +5,7 @@ import { DAYS } from '../data/wedding.js'
 import { inviteLink } from '../lib/guest.js'
 import { STRINGS, dayList } from '../i18n/strings.js'
 
-// For the family, at /?host. Paste the guest list, get one personal link per
+// For the family, at /?invite. Paste the guest list, get one personal link per
 // guest and a WhatsApp message ready to send. Nothing leaves the browser.
 
 const TEMPLATES = {

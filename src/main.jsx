@@ -4,9 +4,9 @@ import App from './App.jsx'
 import { LangProvider } from './i18n/lang.jsx'
 import './styles/index.css'
 
-// /?host opens the family's invitation sender instead of the site.
+// /?invite opens the family's invitation sender instead of the site.
 const HostTool = lazy(() => import('./host/HostTool.jsx'))
-const isHost = new URLSearchParams(window.location.search).has('host')
+const isHost = new URLSearchParams(window.location.search).has('invite')
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

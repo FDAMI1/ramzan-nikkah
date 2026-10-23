@@ -71,7 +71,7 @@ for (const [name, viewport, scale] of [
 // Host tool
 {
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
-  await page.goto(url + '?host', { waitUntil: 'networkidle' })
+  await page.goto(url + '?invite', { waitUntil: 'networkidle' })
   await page.fill('textarea', 'Mohammed Ali & family, 98200 12345\nAyesha Khan, 9876543210\nShaikh family')
   await page.waitForTimeout(500)
   await page.screenshot({ path: `${out}/host.png`, fullPage: true })

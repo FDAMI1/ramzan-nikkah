@@ -25,7 +25,7 @@ shows the time the page has scrolled to.
 ## Personal invitations
 
 - `/?to=Mohammed%20Ali%20%26%20family` — the opening doors greet that guest by name and the RSVP is pre-filled.
-- `/?host` — **for the family**: paste the guest list (`Name, phone` per line), pick English / Urdu / Hindi,
+- `/?invite` — **for the family**: paste the guest list (`Name, phone` per line), pick English / Urdu / Hindi,
   and send each guest their personal link on WhatsApp in one tap. Ticks off who has been sent. The list never leaves the phone/computer.
 
 ## Languages
