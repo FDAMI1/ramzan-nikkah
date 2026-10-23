@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Download, Share2 } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
 import { shareInvite } from '../lib/invite.js'
+import { invited } from '../lib/guest.js'
 import { useLang } from '../i18n/lang.jsx'
 
 export default function Invitation() {
@@ -44,7 +45,7 @@ export default function Invitation() {
             <div className="absolute -inset-10 rounded-full bg-[radial-gradient(circle,rgb(255_248_225/.18),transparent_65%)]" aria-hidden="true" />
             <div className="absolute -inset-3 rotate-[-2.5deg] rounded-[20px] border border-gold-light/30" aria-hidden="true" />
             <img
-              src="/img/card.jpg"
+              src={`/img/card-${invited.join('-')}.jpg`}
               alt="The printed Nikah and Walima invitation card"
               loading="lazy"
               className="relative w-full rounded-[14px] shadow-[0_50px_80px_-30px_rgb(0_0_0/.8)]"
