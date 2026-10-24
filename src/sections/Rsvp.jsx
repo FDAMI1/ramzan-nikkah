@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Minus, Plus, Send } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
 import { Rule } from '../components/Ornaments.jsx'
@@ -18,11 +18,14 @@ export default function Rsvp({ guest = '' }) {
   const [days, setDays] = useState(invited)
   const [dua, setDua] = useState('')
   const [error, setError] = useState('')
+  const nameRef = useRef(null)
 
   const submit = (e) => {
     e.preventDefault()
     if (!name.trim()) {
       setError(t.rsvp.error)
+      nameRef.current?.focus()
+      nameRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' })
       return
     }
     setError('')
@@ -34,7 +37,9 @@ export default function Rsvp({ guest = '' }) {
       going ? `Insha'Allah attending on ${days.join(', ')} November — ${guests} ${guests === 1 ? 'guest' : 'guests'}` : 'Sorry, unable to attend',
       dua.trim() ? `\nDua: ${dua.trim()}` : ''
     ]
-    window.open(whatsappTo(lines.join('\n').trim()), '_blank', 'noopener')
+    const url = whatsappTo(lines.join('\n').trim())
+    // Popup blockers can swallow window.open on phones; fall back to a plain redirect.
+    if (!window.open(url, '_blank')) window.location.assign(url)
   }
 
   const label = 'mb-2 block font-sans text-[12px] uppercase tracking-[0.2em] text-paper/60'
@@ -65,7 +70,7 @@ export default function Rsvp({ guest = '' }) {
 
             <label className="mt-8 block">
               <span className={label}>{t.rsvp.name}</span>
-              <input className="field-dark" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.rsvp.namePh} autoComplete="name" aria-invalid={!!error} />
+              <input ref={nameRef} className="field-dark" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.rsvp.namePh} autoComplete="name" aria-invalid={!!error} />
             </label>
             {error && <p className="mt-2 font-sans text-sm text-blush" role="alert">{error}</p>}
 
